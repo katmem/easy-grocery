@@ -1,0 +1,10 @@
+.env
+bin
+images
+include
+lib
+lib64
+share
+db.sqlite3
+pyvenv.cfg
+**/__pycache__

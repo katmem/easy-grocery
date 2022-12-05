@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+{% block content %}
+	<div class="banner">	
+		<div class="w3l_banner_nav_right">
+		</div>
+			<div class="w3_login_module">
+				<div class="module form-module">
+					<div class="form"></div>
+					<div class="form">
+						<form method="POST" action="{% url 'card_payment' total_sum order_id checkout payment_method_id %}">
+							{% csrf_token %}
+							{{ card_form.as_p }}
+							<input type="submit" value="Ολοκλήρωση παραγγελίας">
+						</form>
+					</div>
+				</div>
+
+			</div>
+				
+			</div>
+			
+		<div class="clearfix"></div>
+	</div>
+{% endblock content %}
+</html>

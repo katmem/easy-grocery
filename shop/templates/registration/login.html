@@ -1,0 +1,70 @@
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+	
+<body>
+{% block content %}	
+<!-- //header -->
+<!-- products-breadcrumb -->
+	<div class="products-breadcrumb">
+		<div class="container">
+			<ul>
+				<li><i class="fa fa-home" aria-hidden="true"></i><a href="/">Αρχική</a><span>|</span></li>
+				<li>Σύνδεση</li>
+			</ul>
+		</div>
+	</div>
+<!-- //products-breadcrumb -->
+<!-- banner -->
+	<div class="banner">
+
+<!-- login -->
+		<div class="w3_login">
+			<h3>Σύνδεση</h3>
+			<div class="w3_login_module">
+				<div class="module form-module">
+					<div class="form"></div>
+				  	<div class="form">
+						<form method="POST">
+							{% csrf_token %}
+							{{ form.as_p }}
+							<input type="submit" value="Σύνδεση">
+						</form>
+						{% if messages %}
+							<ul class="messages">
+								{% for message in messages %}
+								<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+					</div>
+					<div class="cta"><a href="/register">Δεν έχετε λογαριασμό;</a></div>
+					<!-- <div class="cta"><a href="#">Ξεχάσατε τον κωδικό σας;</a></div> -->
+				</div>
+			</div>
+			<script>
+				$('.toggle').click(function(){
+				  // Switches the Icon
+				  $(this).children('i').toggleClass('fa-pencil');
+				  // Switches the forms  
+				  $('.form').animate({
+					height: "toggle",
+					'padding-top': 'toggle',
+					'padding-bottom': 'toggle',
+					opacity: "toggle"
+				  }, "slow");
+				});
+			</script>
+		
+<!-- //login -->
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	
+{% endblock %}
+</body>
+</html>

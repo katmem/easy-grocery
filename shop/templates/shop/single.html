@@ -1,0 +1,67 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+{% block content %}
+	
+	<div class="banner">	
+		<div class="w3l_banner_nav_right">
+			<div class="w3l_banner_nav_right_banner3">
+				
+			</div>
+			<div class="agileinfo_single">
+				<h3>{{ product.name }}</h3>
+				<div class="col-md-4 agileinfo_single_left">
+					<img id="example" src="{{product.photo.url}}" alt="img" class="img-responsive" />
+				</div>
+				<div class="col-md-8 agileinfo_single_right">
+					<div class="w3agile_description">
+						<h4>Περιγραφη :</h4>
+						<p>{{ product.description }}</p>
+					</div>
+					<div class="snipcart-item block">
+						{% if product.salePrice != 0 %}
+							<div class="snipcart-thumb agileinfo_single_right_snipcart">
+								<h4>{{ product.salePrice }}<span><del>{{ product.price }}</del></span></h4>
+							</div>
+				    	{% else %}
+				    		<div class="snipcart-thumb agileinfo_single_right_snipcart">
+								<h4>{{ product.price }}</h4>
+							</div>
+				    	{% endif %}
+
+						
+						{% if anonymous %}
+							<div class="form">
+								<form method = "POST" action="{% url 'anonymous' %}">
+		                    	{% csrf_token %}	
+		                    	<input type="number" id = "quantities" name="quantities" min="1" max="50" value="1">
+		                  		<input type="submit" class="btn btn-info" value="Προσθήκη στο καλάθι" >
+		                  		</form>
+							</div>
+						{% else %}
+							<div class="form">
+								<form method="POST" action="{% url 'product_detail' product.slug  %}">
+									{% csrf_token %}
+									{{ quantity_form.as_p }}
+									{% if product in current_order_products %}
+										<input type="submit" class="btn btn-success" value="Ανανέωση">
+									{% else %}
+										<input type="submit" class="btn btn-info" value="Προσθήκη στο καλάθι">
+									{% endif %}
+								</form>
+							</div>
+						{% endif %}
+						
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+	{% endblock content %}
+</html>

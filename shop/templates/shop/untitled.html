@@ -1,0 +1,1624 @@
+def register_view(request, *args, **kwargs):
+	if request.method == 'POST':
+		form = RegisterForm(request.POST)
+		if form.is_valid():
+			form.save()
+			Name = form.cleaned_data.get('Name')
+			Surname = form.cleaned_data.get('Surname')
+			Phone = form.cleaned_data.get('Phone')
+			Email = form.cleaned_data.get('Email')
+			Username = form.cleaned_data.get('Username')
+			Password = form.cleaned_data.get('Password')
+			Country = form.cleaned_data.get('Country')
+			County = form.cleaned_data.get('County')
+			Region = form.cleaned_data.get('Region')
+			Address = form.cleaned_data.get('Address')
+			AddressNum = form.cleaned_data.get('AddressNum')
+			Postcode = form.cleaned_data.get('Postcode')
+		else:
+			print (form.errors)
+	else:
+		form = RegisterForm()	
+	return render(request, "shop/register.html", {'form':form})
+
+
+
+
+	{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Supermarket Online</title>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Grocery Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<link href="{% static 'shop/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static 'shop/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+<!-- font-awesome icons -->
+<link href="{% static 'shop/css/font-awesome.css' %}" rel="stylesheet" type="text/css" media="all" /> 
+<!-- //font-awesome icons -->
+<!-- js -->
+<script src="{% static 'shop/js/jquery-1.11.1.min.js' %}"></script>
+<!-- //js -->
+<link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="{% static 'shop/js/move-top.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop/js/easing.js' %}"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<!-- start-smoth-scrolling -->
+</head>
+	
+<body>
+<!-- header -->
+	<div class="agileits_header">
+		<div class="w3l_offers">
+			<a href="products.html">Σημερινές Προσφορές !</a>
+		</div>
+		<div class="w3l_search">
+			<form action="#" method="post">
+				<input type="text" name="Product" value="Αναζήτηση Προϊόντος..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Αναζήτηση Προϊόντος...';}" required="">
+				<input type="submit" value=" ">
+			</form>
+		</div>
+		<div class="product_list_header">  
+			<form action="#" method="post" class="last">
+                <fieldset>
+                    <input type="hidden" name="cmd" value="_cart" />
+                    <input type="hidden" name="display" value="1" />
+                    <input type="submit" name="submit" value="Το καλάθι μου" class="button" />
+                </fieldset>
+            </form>
+		</div>
+		<div class="w3l_header_right">
+			<ul>
+				<li class="dropdown profile_details_drop">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
+					<div class="mega-dropdown-menu">
+						<div class="w3ls_vegetables">
+							<ul class="dropdown-menu drp-mnu">
+								<li><a href="login.html">Σύνδεση</a></li> 
+								<li><a href="register.html">Εγγραφή</a></li>
+							</ul>
+						</div>                  
+					</div>	
+				</li>
+			</ul>
+		</div>
+		<div class="w3l_header_right1">
+			<h2><a href="mail.html">Επικοινωνία</a></h2>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+<!-- script-for sticky-nav -->
+	<script>
+	$(document).ready(function() {
+		 var navoffeset=$(".agileits_header").offset().top;
+		 $(window).scroll(function(){
+			var scrollpos=$(window).scrollTop(); 
+			if(scrollpos >=navoffeset){
+				$(".agileits_header").addClass("fixed");
+			}else{
+				$(".agileits_header").removeClass("fixed");
+			}
+		 });
+		 
+	});
+	</script>
+<!-- //script-for sticky-nav -->
+	<div class="logo_products">
+		<div class="container">
+			
+			<div class="w3ls_logo_products_left1">
+				<ul class="special_items">
+					<li><a href="events.html">Events</a><i>/</i></li>
+					<li><a href="about.html">About Us</a><i>/</i></li>
+					<li><a href="products.html">Best Deals</a><i>/</i></li>
+					<li><a href="services.html">Services</a></li>
+				</ul>
+			</div>
+			
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+<!-- //header -->
+<!-- products-breadcrumb -->
+	<div class="products-breadcrumb">
+		<div class="container">
+			<ul>
+				<li><i class="fa fa-home" aria-hidden="true"></i><a href="index.html">Home</a><span>|</span></li>
+				<li>Σύνδεση και Εγγραφή</li>
+			</ul>
+		</div>
+	</div>
+<!-- //products-breadcrumb -->
+<!-- banner -->
+	<div class="banner">
+		<div class="w3l_banner_nav_left">
+		<nav class="navbar nav_bottom">
+			 <!-- Brand and toggle get grouped for better mobile display -->
+			  <div class="navbar-header nav_2">
+				  <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				  </button>
+			   </div> 
+			   <!-- Collect the nav links, forms, and other content for toggling -->
+			 <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+					<ul class="nav navbar-nav nav_1">
+						
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Μανάβικο<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+								<div class="w3ls_vegetables">
+									<ul>											
+										<li class="dropdown mega-dropdown active">
+										<a href="vegetables.html" class="dropdown-toggle disabled" data-toggle="dropdown">Φρούτα<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu"  x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Μήλα</a></li>	
+														<li><a href="vegetables.html">Μπανάνες</a></li>	
+														<li><a href="vegetables.html">Πορτοκάλια-Μανταρίνια-Γκρέιπφρουτ	</a></li>	
+														<li><a href="vegetables.html">Αχλάδια</a></li>	
+														<li><a href="vegetables.html">Ακτινίδια</a></li>	
+														<li><a href="vegetables.html">Λεμόνια-Λάιμς</a></li>	
+														<li><a href="vegetables.html">Ροδάκινα-Νεκταρίνια-Βερίκοκα</a></li>	
+														<li><a href="vegetables.html">Σταφύλια</a></li>	
+														<li><a href="vegetables.html">Φράουλες-Βατόμουρα</a></li>
+														<li><a href="vegetables.html">Ανανάς-Μάνγκο-Εξωτικά Φρούτα</a></li>
+														<li><a href="vegetables.html">Κομμένα και Καθαρισμένα</a></li>											
+													</ul>
+												</div>                  
+											</div>				
+										</li>						
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Λαχανικά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Αγγούρια-Ντομάτες</a></li>	
+														<li><a href="vegetables.html">Πατάτες-Κρεμμύδια-Σκόρδα</a></li>		
+														<li><a href="vegetables.html">Μαρούλια-Σαλάτες-Ρόκα</a></li>	
+														<li><a href="vegetables.html">Έτοιμες Σαλάτες Λαχανικών</a></li>	
+														<li><a href="vegetables.html">Χόρτα</a></li>	
+														<li><a href="vegetables.html">Λάχανο-Μπρόκολο-Κουνουπίδι</a></li>	
+														<li><a href="vegetables.html">Πιπεριές-Μελιτζάνες-Κολοκυθάκια</a></li>	
+														<li><a href="vegetables.html">Αρακάς-Φασολάκια-Μπάμιες-Κουκιά</a></li>	
+														<li><a href="vegetables.html">Καρότα-Ρέβες-Ραπανάκια</a></li>	
+														<li><a href="vegetables.html">Μανιτάρια</a></li>	
+														<li><a href="vegetables.html">Καλαμπόκι-Αγκινάρες-Σπαράγγια</a></li>	
+														<li><a href="vegetables.html">Αρωματικά-Μυρωδικά</a></li>		
+													</ul>
+												</div>                  
+											</div>				
+										</li>								
+									</ul>
+								</div>                  
+							</div>				
+						</li>
+
+
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Κρεοπωλείο<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+								<div class="w3ls_vegetables">
+									<ul>											
+										<li><a href="vegetables.html">Μοσχάρι</a></li>	
+										<li><a href="vegetables.html">Χοιρινό</a></li>	
+										<li><a href="vegetables.html">Κοτόπουλο</a></li>
+										<li><a href="vegetables.html">Γαλοπούλα</a></li>
+										<li><a href="vegetables.html">Κιμάς</a></li>
+										<li><a href="vegetables.html">Λουκάνικα</a></li>
+										<li><a href="vegetables.html">Κυνήγι</a></li>											
+									</ul>
+								</div>                  
+							</div>				
+						</li>
+
+
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Γαλακτοκομικά-Είδη Ψυγείου<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+								<div class="w3ls_vegetables">
+									<ul>											
+										<li class="dropdown mega-dropdown active">
+										<a href="vegetables.html" class="dropdown-toggle disabled" data-toggle="dropdown">Γάλα<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu"  x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Φρέσκο Γάλα</a></li>	
+														<li><a href="vegetables.html">Υψηλής Παστερίωσης</a></li>	
+														<li><a href="vegetables.html">Μακράς Διάρκειας</a></li>
+														<li><a href="vegetables.html">Σοκολατούχο</a></li>
+														<li><a href="vegetables.html">Εβαπορέ</a></li>
+														<li><a href="vegetables.html">Φυτικά Ροφήματα</a></li>		
+													</ul>
+												</div>                  
+											</div>				
+										</li>						
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Γιαούρτια<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Παραδοσιακά Γιαούρτια</a></li>
+														<li><a href="vegetables.html">Λευκά Γιαούρτια</a></li>	
+														<li><a href="vegetables.html">Επιδόρπια Γιαουρτιού</a></li>
+														<li><a href="vegetables.html">Ρόφημα</a></li>
+														<li><a href="vegetables.html">Παιδικά'</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Βούτυρο-Μαργαρίνη<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Βούτυρο</a></li>
+														<li><a href="vegetables.html">Μαργαρίνη</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+
+										<ul>											
+											<li><a href="vegetables.html">Κρέμες Γάλακτος-Σαντιγί</a></li>
+											<li><a href="vegetables.html">Αυγά</a></li>
+											<li><a href="vegetables.html">Χυμοί Ψυγείου</a></li>
+											<li><a href="vegetables.html">Φρέσκοι Ζωμοί</a></li>
+											<li><a href="vegetables.html">Ζύμες-Φύλλα-Μαγιά</a></li>
+										</ul>
+									</ul>
+								</div>                 
+							</div>				
+						</li>
+
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Τυροκομικά<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+								<div class="w3ls_vegetables">
+									<ul>					
+										<li><a href="vegetables.html">Φέτα</a></li>	
+										<li><a href="vegetables.html">Λοιπά Λευκά Τυριά</a></li>
+										<li><a href="vegetables.html">Αλοιφώμενα Τυριά</a></li>	
+										<li><a href="vegetables.html">Mozzarella</a></li>	
+										<li><a href="vegetables.html">Γραβιέρες</a></li>	
+										<li><a href="vegetables.html">Κεφαλογραβιέρες</a></li>	
+										<li><a href="vegetables.html">Κεφαλοτύρια</a></li>	
+										<li><a href="vegetables.html">Παρμεζάνα</a></li>
+										<li><a href="vegetables.html">Regato</a></li>
+										<li><a href="vegetables.html">Χαλλούμι</a></li>
+										<li><a href="vegetables.html">Gouda-Edam-Emmental-Cheddar</a></li>
+										<li><a href="vegetables.html">Ημίσκληρα Τυριά-Κασέρια</a></li>
+										<li><a href="vegetables.html">Λοιπά Σκληρά Τυριά</a></li>
+										<li><a href="vegetables.html">Τριμμένα Τυριά</a></li>
+										<li><a href="vegetables.html">Τυριά Σε Φέτες</a></li>
+										<li><a href="vegetables.html">Delicatessen</a></li>							
+									</ul>
+								</div>                  
+							</div>				
+						</li>
+
+
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Αλλαντικά<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+								<div class="w3ls_vegetables">
+									<ul>					
+										<li><a href="vegetables.html">Ζαμπόν</a></li>	
+										<li><a href="vegetables.html">Γαλοπούλα-Κοτόπουλο</a></li>
+										<li><a href="vegetables.html">Ωμοπλάτη</a></li>	
+										<li><a href="vegetables.html">Λουκάνικα</a></li>	
+										<li><a href="vegetables.html">Σαλάμι Αέρος</a></li>	
+										<li><a href="vegetables.html">Μορταδέλα</a></li>	
+										<li><a href="vegetables.html">Μπέικον-Πανσέτα-Μπριζόλα</a></li>	
+										<li><a href="vegetables.html">Πάριζα-Παριζάκι</a></li>
+										<li><a href="vegetables.html">Σετ Αλλαντικό-Τυρί</a></li>
+										<li><a href="vegetables.html">Delicatessen Αλαντικά</a></li>				
+									</ul>
+								</div>                  
+							</div>				
+						</li>
+
+
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Κατεψυγμένα<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+								<div class="w3ls_vegetables">
+									<ul>											
+										<li class="dropdown mega-dropdown active">
+										<a href="vegetables.html" class="dropdown-toggle disabled" data-toggle="dropdown">Λαχανικά και Φρούτα<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu"  x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Φρούτα</a></li>	
+														<li><a href="vegetables.html">Λαχανικά</a></li>	
+														<li><a href="vegetables.html">Πατάτες</a></li>				
+													</ul>
+												</div>                  
+											</div>				
+										</li>						
+										<li><a href="vegetables.html">Κρέας</a></li>	
+										<li><a href="vegetables.html">Ψάρια-Θαλασσινά</a></li>
+										<li><a href="vegetables.html">Έτοιμα Φαγητά</a></li>
+										<li><a href="vegetables.html">Παγωτά</a></li>
+
+										<li class="dropdown mega-dropdown active">
+										<a href="vegetables.html" class="dropdown-toggle disabled" data-toggle="dropdown">Πίτσες-Φύλλα-Πίτες<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu"  x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Πίτες-Πιτάκια</a></li>	
+														<li><a href="vegetables.html">Πίτσες-Πεϊνιρλί</a></li>	
+														<li><a href="vegetables.html">Φύλλα-Ζύμες</a></li>				
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+
+									</ul>
+								</div>                  
+							</div>				
+						</li>
+
+
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Αρτοζαχαροπλαστείο<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+								<div class="w3ls_vegetables">
+									<ul>											
+										<li class="dropdown mega-dropdown active">
+										<a href="vegetables.html" class="dropdown-toggle disabled" data-toggle="dropdown">Φρέσκο Ψωμί<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu"  x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Σίτου</a></li>	
+														<li><a href="vegetables.html">Σίκαλης-Ολικής Άλεσης</a></li>
+														<li><a href="vegetables.html">Άλλα Είδη</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>						
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Ψωμί Για Τοστ<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Σίτου</a></li>	
+														<li><a href="vegetables.html">Σίκαλης-Ολικής Άλεσης</a></li>
+														<li><a href="vegetables.html">Πίτες-Ψωμάκια</a></li>	
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Φρυγανιές<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Σίτου</a></li>	
+														<li><a href="vegetables.html">Σίκαλης-Ολικής Άλεσης</a></li>
+														<li><a href="vegetables.html">Τρίμμα</a></li>	
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Παξιμάδια<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Σίτου</a></li>	
+														<li><a href="vegetables.html">Σίκαλης-Ολικής Άλεσης</a></li>
+														<li><a href="vegetables.html">Κριθαρένια</a></li>
+														<li><a href="vegetables.html">Παξιμαδάκια-Snacks</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Κρουασάν<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Ατομικά</a></li>	
+														<li><a href="vegetables.html">Μίνι</a></li>	
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Τσουρέκια<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Ατομικά</a></li>	
+														<li><a href="vegetables.html">Οικογενειακά</a></li>	
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+										<li><a href="vegetables.html">Κέικ-Ντόνατς</a></li>	
+										<li><a href="vegetables.html">Κρουτόν</a></li>	
+										<li><a href="vegetables.html">Γλυκά</a></li>							
+									</ul>
+								</div>                  
+							</div>				
+						</li>
+
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Ποτά-Χυμοί-Αναψυκτικά-Νερά<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+								<div class="w3ls_vegetables">
+									<ul>											
+										<li class="dropdown mega-dropdown active">
+										<a href="vegetables.html" class="dropdown-toggle disabled" data-toggle="dropdown">Αναψυκτικά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu"  x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Cola</a></li>	
+														<li><a href="vegetables.html">Γκαζόζα</a></li>	
+														<li><a href="vegetables.html">Λεμονάδα</a></li>	
+														<li><a href="vegetables.html">Πορτοκαλάδα</a></li>	
+														<li><a href="vegetables.html">Σόδα-Τόνικ</a></li>	
+														<li><a href="vegetables.html">Ενεργειακά-Ισοτονικά</a></li>	
+														<li><a href="vegetables.html">Ice Tea-Ice Coffee</a></li>	
+														<li><a href="vegetables.html">Βυσσινάδα Και Άλλα</a></li>	
+													</ul>
+												</div>                  
+											</div>				
+										</li>						
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Κρασιά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Λευκά Κρασιά</a></li>	
+														<li><a href="vegetables.html">Ροζέ Κρασιά</a></li>	
+														<li><a href="vegetables.html">Ερυθρά Κρασιά</a></li>	
+														<li><a href="vegetables.html">Γλυκά Κρασιά</a></li>	
+														<li><a href="vegetables.html">Αφρώδεις Οίνοι</a></li>	
+														<li><a href="vegetables.html">Σαμπάνιες</a></li>			
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Χυμοί Εκτός Ψυγείου<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Φυσικοί</a></li>	
+														<li><a href="vegetables.html">Νέκταρ-Φρουτοποτά</a></li>	
+														<li><a href="vegetables.html">Συμπυκνωμένοι</a></li>		
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Μπύρες<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Lager</a></li>	
+														<li><a href="vegetables.html">Pils</a></li>	
+														<li><a href="vegetables.html">Weiss</a></li>	
+														<li><a href="vegetables.html">Ale-Stout</a></li>	
+														<li><a href="vegetables.html">Trappist-Abbey</a></li>		
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Ποτά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Ουίσκι</a></li>	
+														<li><a href="vegetables.html">Βότκα-Τζιν-Ρούμι</a></li>	
+														<li><a href="vegetables.html">Τεκίλα</a></li>	
+														<li><a href="vegetables.html">Μηλίτης</a></li>	
+														<li><a href="vegetables.html">Coctail Mix</a></li>	
+														<li><a href="vegetables.html">Τσίπουρο</a></li>	
+														<li><a href="vegetables.html">Ούζο</a></li>	
+														<li><a href="vegetables.html">Κονιάκ-Μπράντι</a></li>	
+														<li><a href="vegetables.html">Λικέρ</a></li>	
+														<li><a href="vegetables.html">Απεριτίφ-Χωνευτικά</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Νερά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Επιτραπέζια-Μεταλλικά</a></li>
+														<li><a href="vegetables.html">Ανθρακούχα</a></li>	
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+										<li><a href="vegetables.html">Ξηροί Καρποί</a></li>
+										<li><a href="vegetables.html">Αποξηραμένα Φρούτα</a></li>	
+									</ul>
+								</div>                  
+							</div>				
+						</li>
+
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Πρωινό-Snacks-Ροφήματα<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+								<div class="w3ls_vegetables">
+									<ul>											
+										<li class="dropdown mega-dropdown active">
+										<a href="vegetables.html" class="dropdown-toggle disabled" data-toggle="dropdown">Δημητριακά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu"  x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Corn Flakes</a></li>	
+														<li><a href="vegetables.html">Muesli</a></li>	
+														<li><a href="vegetables.html">Ενηλίκων</a></li>	
+														<li><a href="vegetables.html">Παιδικά</a></li>	
+														<li><a href="vegetables.html">Μπάρες Δημητριακών</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>						
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Σοκολάτες<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Υγείας</a></li>	
+														<li><a href="vegetables.html">Γάλακτος</a></li>	
+														<li><a href="vegetables.html">Λευκές</a></li>	
+														<li><a href="vegetables.html">Γεμιστές-Με Ξηρούς Καρπούς</a></li>	
+														<li><a href="vegetables.html">Παιδικές</a></li>	
+														<li><a href="vegetables.html">Σοκολατάκια</a></li>	
+														<li><a href="vegetables.html">Snacks-Μπάρες</a></li>	
+														<li><a href="vegetables.html">Γκοφρέτες</a></li>			
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Μπισκότα<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Απλά</a></li>	
+														<li><a href="vegetables.html">Γεμιστά</a></li>	
+														<li><a href="vegetables.html">Σοκολάτας</a></li>
+														<li><a href="vegetables.html">Πολυδημητριακά</a></li>
+														<li><a href="vegetables.html">Digestive</a></li>		
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Καραμέλες<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Τσέπης</a></li>	
+														<li><a href="vegetables.html">Μεγάλες Συσκευασίες</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Σνακς<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Τσιπς</a></li>	
+														<li><a href="vegetables.html">Pop Corn</a></li>
+														<li><a href="vegetables.html">Καλαμποκάλευρου</a></li>
+														<li><a href="vegetables.html">Λοιπά Σνακς</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Μαρμελάδες<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Ροδάκινο-Βερίκοκο</a></li>	
+														<li><a href="vegetables.html">Φράουλα-Κεράσι</a></li>
+														<li><a href="vegetables.html">Άλλες Γεύσεις</a></li>
+														<li><a href="vegetables.html">Χωρίς Προσθήκη Ζάχαρης</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+
+										<li><a href="vegetables.html">Είδη Επάλειψης</a></li>		
+
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Καφές<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Ελληνικός</a></li>
+														<li><a href="vegetables.html">Στιγμιαίος</a></li>
+														<li><a href="vegetables.html">Φίλτρου</a></li>
+														<li><a href="vegetables.html">Espresso-Capuccino</a></li>
+														<li><a href="vegetables.html">Κάψουλες</a></li>
+														<li><a href="vegetables.html">Υποκατάστατα-Συνοδευτικά</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Τσάι-Αψεφήματα<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Τσάι</a></li>
+														<li><a href="vegetables.html">Αψεφήματα</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Παραδοσιακά Γλυκά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Λουκούμια-Παστέλια</a></li>
+														<li><a href="vegetables.html">Γλυκά Κουταλιού-Μαστίχες</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+											
+										<li><a href="vegetables.html">Τσίχλες</a></li>
+										<li><a href="vegetables.html">Κράκερς</a></li>
+										<li><a href="vegetables.html">Μέλι</a></li>	
+										<li><a href="vegetables.html">Κακάο-Σοκολάτα Ρόφημα</a></li>
+									</ul>
+								</div>                  
+							</div>				
+						</li>
+
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Συσκευασμένα Τρόφιμα<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+								<div class="w3ls_vegetables">
+									<ul>											
+										<li class="dropdown mega-dropdown active">
+										<a href="vegetables.html" class="dropdown-toggle disabled" data-toggle="dropdown">Ζυμαρικά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu"  x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Μακαρόνια</a></li>	
+														<li><a href="vegetables.html">Άλλες Πάστες</a></li>	
+														<li><a href="vegetables.html">Γεμιστά</a></li>	
+														<li><a href="vegetables.html">Παραδοσιακά</a></li>	
+														<li><a href="vegetables.html">Φρέσκα</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>						
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Ρύζι<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Λευκό</a></li>	
+														<li><a href="vegetables.html">Parboiled</a></li>	
+														<li><a href="vegetables.html">Αρωματικό</a></li>	
+														<li><a href="vegetables.html">Άλλα Ρύζια</a></li>			
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Όσπρια<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Φασόλια</a></li>	
+														<li><a href="vegetables.html">Φακές</a></li>	
+														<li><a href="vegetables.html">Ρεβύθια</a></li>
+														<li><a href="vegetables.html">Άλλα Όσπρια</a></li>	
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Ελαιόλαδο<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Κλασικό</a></li>	
+														<li><a href="vegetables.html">Έξτρα Παρθένο-Παρθένο</a></li>
+														<li><a href="vegetables.html">Πυρηνέλαιο</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Σπορέλαιο<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Ηλιέλαιο</a></li>	
+														<li><a href="vegetables.html">Αραβοσιτέλαιο</a></li>
+														<li><a href="vegetables.html">Ειδικά Σπορέλαια</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+										<li><a href="vegetables.html">Μαγειρικά Λίπη</a></li>
+
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Κονσέρβες<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Ψιλοκομμένες Ντομάτες</a></li>
+														<li><a href="vegetables.html">Πασσάτα</a></li>
+														<li><a href="vegetables.html">Ολόκληρες Ντομάτες</a></li>
+														<li><a href="vegetables.html">Πελτές Ντομάτας</a></li>
+														<li><a href="vegetables.html">Μανιτάρια</a></li>
+														<li><a href="vegetables.html">Διάφορα Λαχανικά</a></li>
+														<li><a href="vegetables.html">Τόνος-Τονοσαλάτα</a></li>
+														<li><a href="vegetables.html">Σαρδέλες</a></li>
+														<li><a href="vegetables.html">Μαλάκια</a></li>
+														<li><a href="vegetables.html">Διάφορα Ψαρικά</a></li>
+														<li><a href="vegetables.html">Κρεατικά-Λουκάνικα</a></li>
+														<li><a href="vegetables.html">Έτοιμα Φαγητά</a></li>
+														<li><a href="vegetables.html">Κομπόστες</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+
+									
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Αλεύρι-Σιμιγδάλι<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Αλεύρι Όλων Των Χρήσεων</a></li>
+														<li><a href="vegetables.html">Σκληρό-Μαλακό Αλεύρι</a></li>
+														<li><a href="vegetables.html">Φαρίνα</a></li>
+														<li><a href="vegetables.html">Ειδικά Άλευρα</a></li>
+														<li><a href="vegetables.html">Σιμιγδάλι</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Είδη Ζαχαροπλαστικής<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Κορν Φλάουρ-Νισεστές</a></li>
+														<li><a href="vegetables.html">Γαρνιρίσματα</a></li>
+														<li><a href="vegetables.html">Υλικά Ζαχαροπλαστικής</a></li>
+														<li><a href="vegetables.html">Βάσεις-Παντεσπάνι</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Μείγματα Για Γλυκα<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Ζελέ-Κρέμες</a></li>
+														<li><a href="vegetables.html">Μείγμα Για Τούρτες</a></li>
+														<li><a href="vegetables.html">Μείγμα Για Άλλα Γλυκά</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Ζάχαρη<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Λευκή</a></li>
+														<li><a href="vegetables.html">Ακατέργαστη</a></li>
+														<li><a href="vegetables.html">Υποκατάστατα</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Αλάτι-Μπαχαρικά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Αλάτι</a></li>
+														<li><a href="vegetables.html">Πιπέρι</a></li>
+														<li><a href="vegetables.html">Μπαχαρικά</a></li>
+														<li><a href="vegetables.html">Βότανα</a></li>
+														<li><a href="vegetables.html">Μείγματα Μπαχαρικών</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Σάλτσες-Dressings<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Για Κρέας</a></li>
+														<li><a href="vegetables.html">Για Σαλάτες</a></li>
+														<li><a href="vegetables.html">Για Ζυμαρικά</a></li>
+														<li><a href="vegetables.html">Διάφορα Dressings</a></li>
+														<li><a href="vegetables.html">Κέτσαπ</a></li>
+														<li><a href="vegetables.html">Μαγιονέζα</a></li>
+														<li><a href="vegetables.html">Μουστάρδα</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Ξύδι-Λεμόνι<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Ξύδι</a></li>
+														<li><a href="vegetables.html">Ξύδι Balsamico</a></li>
+														<li><a href="vegetables.html">Κρέμα Balsamico</a></li>
+														<li><a href="vegetables.html">Λεμόνι</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Σούπες-Κύβοι-Πουρές<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Κύβοι-Ζωμός</a></li>
+														<li><a href="vegetables.html">Πουρές</a></li>
+														<li><a href="vegetables.html">Μπεσαμέλ</a></li>
+														<li><a href="vegetables.html">Σούπες Στιγμής</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Διεθνής Κουζίνα<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Άπω Ανατολής</a></li>
+														<li><a href="vegetables.html">Αραβικά</a></li>
+														<li><a href="vegetables.html">Ινδικά</a></li>
+														<li><a href="vegetables.html">Μεξικάνικα</a></li>
+														<li><a href="vegetables.html">Διάφορα</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>		
+									</ul>
+								</div>                  
+							</div>				
+						</li>
+
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Μωρό<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+								<div class="w3ls_vegetables">
+									<ul>											
+										<li class="dropdown mega-dropdown active">
+										<a href="vegetables.html" class="dropdown-toggle disabled" data-toggle="dropdown">Βρεφικές Τροφές<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu"  x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Γάλα-Ροφήματα 1ης Ηλικίας</a></li>	
+														<li><a href="vegetables.html">Γάλα-Ροφήματα 2ης Ηλικίας Και Άνω</a></li>	
+														<li><a href="vegetables.html">Κρέμες</a></li>	
+														<li><a href="vegetables.html">Βρεφικά Γιαούρτια</a></li>	
+														<li><a href="vegetables.html">Έτοιμα Γεύματα</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>						
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Πάνες<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Ανοιχτές</a></li>	
+														<li><a href="vegetables.html">Πάνες-Βρακάκι</a></li>		
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li><a href="vegetables.html">Μωρομάντηλα</a></li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Αξεσουάρ<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Μπιμπερό-Σαλιάρες</a></li>	
+														<li><a href="vegetables.html">Πιπίλες</a></li>	
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Περιποίηση Σώματος<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Σαμπουάν-Αφρόλουτρο</a></li>	
+														<li><a href="vegetables.html">Κρέμες-Πούδρες</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+									</ul>
+								</div>                  
+							</div>				
+						</li>
+
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Προσωπική Περιποίηση<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+								<div class="w3ls_vegetables">
+									<ul>											
+										<li class="dropdown mega-dropdown active">
+										<a href="vegetables.html" class="dropdown-toggle disabled" data-toggle="dropdown">Γυναικεία Περιποίηση<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu"  x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Καθαρισμός Προσώπου</a></li>	
+														<li><a href="vegetables.html">Ενυδάτωση Προσώπου</a></li>	
+														<li><a href="vegetables.html">Μακιγιάζ</a></li>	
+														<li><a href="vegetables.html">Ξυραφάκια</a></li>	
+														<li><a href="vegetables.html">Αρώματα</a></li>
+														<li><a href="vegetables.html">Κρέμες Αδυνατίσματος</a></li>
+														<li><a href="vegetables.html">Αποτριχωτικά</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>						
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Ανδρική Περιποίηση<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Αφροί-Gel-Κρέμες Ξυρίσματος</a></li>	
+														<li><a href="vegetables.html">Ξυριστικά Μιας Χρήσης</a></li>
+														<li><a href="vegetables.html">Ξυριστικές Μηχανές-Ανταλλακτικά</a></li>
+														<li><a href="vegetables.html">After Shave</a></li>
+														<li><a href="vegetables.html">Ενυδατικές Κρέμες</a></li>		
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Φροντίδα Σώματος<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Αφρόλουτρα-Αφροντούς</a></li>	
+														<li><a href="vegetables.html">Σφουγγάρια Μπάνιου</a></li>	
+														<li><a href="vegetables.html">Κρέμες-Γαλακτώματα</a></li>
+														<li><a href="vegetables.html">Αποσμητικά</a></li>
+														<li><a href="vegetables.html">Κρεμοσάπουνα</a></li>
+														<li><a href="vegetables.html">Σαπούνια</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Προσωπική Υγιεινή<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Πάνες Ενηλίκων</a></li>	
+														<li><a href="vegetables.html">Λοιπά Προϊόντα Υγιεινής</a></li>
+														<li><a href="vegetables.html">Σερβιέτες</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Φροντίδα Μαλλιών<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Σαμπουάν</a></li>	
+														<li><a href="vegetables.html">Κρέμες Μαλλιών</a></li>
+														<li><a href="vegetables.html">Μάσκες Μαλλιών</a></li>
+														<li><a href="vegetables.html">Βαφές Μαλλιών</a></li>	
+														<li><a href="vegetables.html">Gel-Κρέμες</a></li>
+														<li><a href="vegetables.html">Αφρός</a></li>
+														<li><a href="vegetables.html">Λακ-Σπρέι</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Στοματική Υγιεινή<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Οδοντόβουρτσες</a></li>	
+														<li><a href="vegetables.html">Οδοντόκρεμες</a></li>
+														<li><a href="vegetables.html">Στοματικά Διαλύματα</a></li>
+														<li><a href="vegetables.html">Οδοντικά Νήματα</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Παραφαρμακευτικά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Πρώτων Βοηθειών</a></li>	
+														<li><a href="vegetables.html">Βαμβάκια-Μπατονέτες</a></li>
+														<li><a href="vegetables.html">Επιθέματα</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li><a href="vegetables.html">Αντηλιακά</a></li>
+									</ul>
+								</div>                  
+							</div>				
+						</li>
+
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Καθαριστικά-Είδη Σπιτιού<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+								<div class="w3ls_vegetables">
+									<ul>											
+										<li class="dropdown mega-dropdown active">
+										<a href="vegetables.html" class="dropdown-toggle disabled" data-toggle="dropdown">Καθαριστικά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu"  x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Μπάνιο</a></li>	
+														<li><a href="vegetables.html">Κατά Των Αλάτων</a></li>	
+														<li><a href="vegetables.html">Τζαμιών-Επιφανειών</a></li>	
+														<li><a href="vegetables.html">Χλωροκαθαριστικά</a></li>	
+														<li><a href="vegetables.html">Πατώματος</a></li>
+														<li><a href="vegetables.html">Γενικού Καθαρισμού</a></li>
+														<li><a href="vegetables.html">Επίπλων-Λοιπών Αντικειμένων</a></li>
+														<li><a href="vegetables.html">Χαλιών</a></li>
+														<li><a href="vegetables.html">Περιποίηση Υποδημάτων</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>						
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Αξεσουάρ Καθαρισμού<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Γάντια Κουζίνας</a></li>	
+														<li><a href="vegetables.html">Ξεσκονόπανα-Σφουγγαρόπανα</a></li>
+														<li><a href="vegetables.html">Σακούλες Απορριμάτων</a></li>
+														<li><a href="vegetables.html">Σκούπες-Σφουγγαρίστρες-Κουβάδες</a></li>
+														<li><a href="vegetables.html">Σφουγγαράκια-Συρματάκια</a></li>		
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Απορρυπαντικά Πιάτων<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Χεριού</a></li>	
+														<li><a href="vegetables.html">Πλυντηρίου Πιάτων</a></li>	
+														<li><a href="vegetables.html">Αλάτι-Συμπληρωματικά Πλύσης</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Απορρυπαντικά Πλυντηρίου Ρούχων<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Υγρά Για Σκούρα</a></li>	
+														<li><a href="vegetables.html">Κλασικά Υγρά</a></li>
+														<li><a href="vegetables.html">Υγρά Για Μάλλινα-Ευαίσθητα</a></li>
+														<li><a href="vegetables.html">Υγρά Για Χρωματιστά</a></li>
+														<li><a href="vegetables.html">Υγρά Μασσαλίας</a></li>
+														<li><a href="vegetables.html">Σκόνη</a></li>
+														<li><a href="vegetables.html">Συμπυκνωμένα Υγρά</a></li>
+														<li><a href="vegetables.html">Κάψουλες-Ταμπλέτες</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>	
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Μαλακτικά Ρούχων<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Υγρό</a></li>	
+														<li><a href="vegetables.html">Συμπυκνωμένο</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Λευκαντικά-Ενισχυτικά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Υγρό</a></li>	
+														<li><a href="vegetables.html">Σκόνη</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li><a href="vegetables.html">Αποσκληρυντικά Πλυντηρίου</a></li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Απορρυπαντικά Χεριού<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Σκόνη</a></li>	
+														<li><a href="vegetables.html">Σαπούνι</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Χαρτί Οικιακής Χρήσης<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Χαρτί Υγείας</a></li>	
+														<li><a href="vegetables.html">Χαρτί Κουζίνας</a></li>
+														<li><a href="vegetables.html">Χαρτοπετσέτες</a></li>
+														<li><a href="vegetables.html">Χαρτομάντηλα</a></li>
+														<li><a href="vegetables.html">Υγρομάντηλα</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Είδη Οικιακής Χρήσης<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Είδη Κουζίνας</a></li>	
+														<li><a href="vegetables.html">Σκεύη Μαγειρικής</a></li>
+														<li><a href="vegetables.html">Επιτραπέζια Είδη</a></li>
+														<li><a href="vegetables.html">Μεμβράνες-Αλουμινόχαρτα-Άλλα</a></li>
+														<li><a href="vegetables.html">Φαγητοδοχεία</a></li>
+														<li><a href="vegetables.html">Αλουμινοσκεύη</a></li>
+														<li><a href="vegetables.html">Είδη Πάρτι</a></li>
+														<li><a href="vegetables.html">Είδη Μπάνιου</a></li>
+														<li><a href="vegetables.html">Μπαταρίεςη</a></li>
+														<li><a href="vegetables.html">Λάμπες</a></li>
+														<li><a href="vegetables.html">Μικροεργαλεία-Άλλα</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Εντομοκτόνα-Εντομοαπωθητικά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Εντομοαπωθητικά Χώρου</a></li>	
+														<li><a href="vegetables.html">Εντομοκτόνα</a></li>
+														<li><a href="vegetables.html">Σκοροαπωθητικά</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Φύλαξη Ρούχων<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Αποσμητικά Ρούχων</a></li>	
+														<li><a href="vegetables.html">Βούρτσες</a></li>
+														<li><a href="vegetables.html">Κρεμάστρες</a></li>
+														<li><a href="vegetables.html">Σακούλες Φύλαξης Ρούχων</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Είδη Σιδερώματος-Απλώματος<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Απιονισμένο Νερό</a></li>	
+														<li><a href="vegetables.html">Σιδερώστρες</a></li>
+														<li><a href="vegetables.html">Απλώστρες-Είδη Απλώματος</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Αρωματικά-Κεριά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Κεριά-Ρεσώ</a></li>	
+														<li><a href="vegetables.html">Αρωματικά Χώρου</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Γραφική Ύλη-Αναλώσιμα<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Γραφική Ύλη</a></li>	
+														<li><a href="vegetables.html">Χαρτικά</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li><a href="vegetables.html">Δώρα-Παιχνίδια</a></li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Είδη Αυτοκινήτου<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Αρωματικά</a></li>	
+														<li><a href="vegetables.html">Καθαριστικά</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Εποχιακά<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">BBQ-Τζάκι</a></li>	
+														<li><a href="vegetables.html">Είδη Κήπου</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li> 
+										<li><a href="vegetables.html">Περιποίηση Υποδημάτων</a></li>
+									</ul>
+								</div>                  
+							</div>				
+						</li>
+
+						<li class="dropright mega-dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Κατοικίδια<span class="caret"></span></a>				
+							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+								<div class="w3ls_vegetables">
+									<ul>											
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Γάτες<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>		
+														<li><a href="vegetables.html">Ξηρά Τροφή</a></li>
+														<li><a href="vegetables.html">Υγρή Τροφή</a></li>	
+														<li><a href="vegetables.html">Σνακ</a></li>
+														<li><a href="vegetables.html">Ειδικές Τροφές</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										
+										<li class="dropdown mega-dropdown active">
+										<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">Σκύλος<span class="caret"></span></a>				
+											<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu" x-placement="right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(108px, 0px, 0px);">
+												<div class="w3ls_vegetables">
+													<ul>											
+														<li><a href="vegetables.html">Ξηρά Τροφή</a></li>	
+														<li><a href="vegetables.html">Υγρή Τροφή</a></li>
+														<li><a href="vegetables.html">Σνακ</a></li>
+														<li><a href="vegetables.html">Ειδικές Τροφές</a></li>
+													</ul>
+												</div>                  
+											</div>				
+										</li>
+										<li><a href="vegetables.html">Υγιεινή Ζώων</a></li>
+										<li><a href="vegetables.html">Ψάρια Ενυδρείου</a></li>
+									</ul>
+								</div>                  
+							</div>				
+						</li>
+					</ul>
+				 </div><!-- /.navbar-collapse -->
+
+			</nav>
+		</div>
+		<div class="w3l_banner_nav_right">
+<!-- login -->
+		<div class="w3_login">
+			<h3>Σύνδεση και Εγγραφή</h3>
+			<div class="w3_login_module">
+				<div class="module form-module">
+				  <div class="toggle"><i class="fa fa-times fa-pencil"></i>
+					<div class="tooltip">Εναλλαγη</div>
+				  </div>
+				  <div class="form">
+					<h2>Συνδεθείτε στο λογαριασμό σας</h2>
+					<form action="login.html" method="post">
+						{% csrf_token %}
+					  <input type="text" name="Username" placeholder="Όνομα χρήστη" required=" ">
+					  <input type="password" name="Password" placeholder="Κωδικός πρόσβασης" required=" ">
+					  <input type="submit" value="Σύνδεση">
+					</form>
+				  </div>
+				  <div class="form">
+					<h2>Δημιουργήστε ένα λογαριασμό</h2>
+					<form action="register.html" method="post">
+						{% csrf_token %}
+					  <input type="text" name="first_name" placeholder="Όνομα" required=" ">
+					  <input type="text" name="last_name" placeholder="Επίθετο" required=" ">
+					  <input type="text" name="Phone" placeholder="Τηλέφωνο" required=" ">
+					  <input type="email" name="email" placeholder="Email" required=" ">
+					  <input type="text" name="username" placeholder="Όνομα χρήστη" required=" ">
+					  <input type="password" name="password1" placeholder="Κωδικός πρόσβασης" required=" ">
+					  <input type="password" name="password2" placeholder="Κωδικός πρόσβασης" required=" ">
+					  <select name="Country" required=" ">
+					  	<option selected hidden> Επιλέξτε χώρα</option>
+					  	<option value = "Ελλάδα">Ελλάδα</option>
+					  </select>	
+					  <select name="County" required=" ">
+					  	<option selected hidden>Επιλέξτε νομό</option>
+					  	<option value = "Νομός Αιτωλοακαρνανίας">Νομός Αιτωλοακαρνανίας</option>
+					  	<option value = "Νομός Αργολίδας">Νομός Αργολίδας</option>
+					  	<option value = "Νομός Αρκαδίας">Νομός Αρκαδίας</option>
+					  	<option value = "Νομός Άρτας">Νομός Άρτας</option>
+					  	<option value = "Νομός Αχαίας">Νομός Αχαίας</option>
+					  	<option value = "Νομός Αττικής">Νομός Αττικής</option>
+					  	<option value = "Νομός Βοιωτίας">Νομός Βοιωτίας</option>
+					  	<option value = "Νομός Γρεβενών">Νομός Γρεβενών</option>
+					  	<option value = "Νομός Δράμας">Νομός Δράμας</option>
+					  	<option value = "Νομός Δωδεκανήσου">Νομός Δωδεκανήσου</option>
+					  	<option value = "Νομός Έβρου">Νομός Έβρου</option>
+					  	<option value = "Νομός Ευβοίας">Νομός Ευβοίας</option>
+					  	<option value = "Νομός Ευρυτανίας">Νομός Ευρυτανίας</option>
+					  	<option value = "Νομός Ζακύνθου">Νομός Ζακύνθου</option>
+					  	<option value = "Νομός Ηλείας">Νομός Ηλείας</option>
+					  	<option value = "Νομός Ημαθίας">Νομός Ημαθίας</option>
+					  	<option value = "Νομός Ηρακλείου">Νομός Ηρακλείου</option>
+					  	<option value = "Νομός Θεσπρωτίας">Νομός Θεσπρωτίας</option>
+					  	<option value = "Νομός Θεσσαλονίκης">Νομός Θεσσαλονίκης</option>
+					  	<option value = "Νομός Ιωαννίνων">Νομός Ιωαννίνων</option>
+					  	<option value = "Νομός Καβάλας">Νομός Καβάλας</option>
+					  	<option value = "Νομός Καρδίτσας">Νομός Καρδίτσας</option>
+					  	<option value = "Νομός Καστοριάς">Νομός Καστοριάς</option>
+					  	<option value = "Νομός Κέρκυρας">Νομός Κέρκυρας</option>
+					  	<option value = "Νομός Κεφαλλονιάς">Νομός Κεφαλλονιάς</option>
+					  	<option value = "Νομός Κιλκίς">Νομός Κιλκίς</option>
+					  	<option value = "Νομός Κοζάνης">Νομός Κοζάνης</option>
+					  	<option value = "Νομός Κορινθίας">Νομός Κορινθίας</option>
+					  	<option value = "Νομός Κυκλάδων">Νομός Κυκλάδων</option>
+					  	<option value = "Νομός Λακωνίας">Νομός Λακωνίας</option>
+					  	<option value = "Νομός Λάρισας">Νομός Λάρισας</option>
+					  	<option value = "Νομός Λασιθίου">Νομός Λασιθίου</option>
+					  	<option value = "Νομός Λέσβου">Νομός Λέσβου</option>
+					  	<option value = "Νομός Λευκάδας">Νομός Λευκάδας</option>
+					  	<option value = "Νομός Μαγνησίας">Νομός Μαγνησίας</option>
+					  	<option value = "Νομός Μεσσηνίας">Νομός Μεσσηνίας</option>
+					  	<option value = "Νομός Ξάνθης">Νομός Ξάνθης</option>
+					  	<option value = "Νομός Πέλλας">Νομός Πέλλας</option>
+					  	<option value = "Νομός Πιερίας">Νομός Πιερίας</option>
+					  	<option value = "Νομός Πρέβεζας">Νομός Πρέβεζας</option>
+					  	<option value = "Νομός Ρεθύμνου">Νομός Ρεθύμνου</option>
+					  	<option value = "Νομός Ροδόπης">Νομός Ροδόπης</option>
+					  	<option value = "Νομός Σάμου">Νομός Σάμου</option>
+					  	<option value = "Νομός Σερρών">Νομός Σερρών</option>
+					  	<option value = "Νομός Τρικάλων">Νομός Τρικάλων</option>
+					  	<option value = "Νομός Φθιώτιδας">Νομός Φθιώτιδας</option>
+					  	<option value = "Νομός Φλώρινας">Νομός Φλώρινας</option>
+					  	<option value = "Νομός Φωκίδας">Νομός Φωκίδας</option>
+					  	<option value = "Νομός Χαλκιδικής">Νομός Χαλκιδικής</option>
+					  	<option value = "Νομός Χανίων">Νομός Χανίων</option>
+					  	<option value = "Νομός Χίου">Νομός Χίου</option>
+					  </select>	
+					  <input type="text" name="Region" placeholder="Περιοχή" required=" ">
+					  <input type="text" name="Address" placeholder="Διεύθυνση" required=" ">
+					  <input type="text" name="AddressNum" placeholder="Αριθμός" required=" ">
+					  <input type="text" name="Postcode" placeholder="ΤΚ" required=" ">	
+					  <input type="submit" value="Εγγραφή">
+					</form>
+				  </div>
+				  <div class="cta"><a href="#">Ξεχάσατε τον κωδικό σας;</a></div>
+				</div>
+			</div>
+			<script>
+				$('.toggle').click(function(){
+				  // Switches the Icon
+				  $(this).children('i').toggleClass('fa-pencil');
+				  // Switches the forms  
+				  $('.form').animate({
+					height: "toggle",
+					'padding-top': 'toggle',
+					'padding-bottom': 'toggle',
+					opacity: "toggle"
+				  }, "slow");
+				});
+			</script>
+		</div>
+<!-- //login -->
+		</div>
+		<div class="clearfix"></div>
+	</div>
+<!-- //banner -->
+<!-- newsletter-top-serv-btm -->
+	
+<!-- //newsletter-top-serv-btm -->
+<!-- newsletter -->
+	<div class="newsletter">
+		<div class="container">
+			<div class="w3agile_newsletter_left">
+				<h3>Εγγραφή για newsletter</h3>
+			</div>
+			<div class="w3agile_newsletter_right">
+				<form action="#" method="post">
+					<input type="email" name="Email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+					<input type="submit" value="Εγγραφη">
+				</form>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+<!-- //newsletter -->
+<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="col-md-3 w3_footer_grid">
+				<h3>ΠΛηροφοριες</h3>
+				<ul class="w3_footer_grid_list">
+					<li><a href="about.html">Σχετικά με εμάς</a></li>
+					<li><a href="products.html">Καλύτερες προσφορές</a></li>
+					<li><a href="services.html">Υπηρεσίες</a></li>
+				</ul>
+			</div>
+			<div class="col-md-3 w3_footer_grid">
+				<h3>Πολιτικη</h3>
+				<ul class="w3_footer_grid_list">
+					<li><a href="faqs.html">FAQ</a></li>
+					<li><a href="privacy.html">Πολιτική απορρήτου</a></li>
+					<li><a href="privacy.html">Όροι χρήσης</a></li>
+				</ul>
+			</div>
+			<div class="col-md-3 w3_footer_grid">
+				<h3>Προϊοντα</h3>
+				<ul class="w3_footer_grid_list">
+					<li><a href="pet.html">Pet Food</a></li>
+					<li><a href="frozen.html">Frozen Snacks</a></li>
+					<li><a href="kitchen.html">Kitchen</a></li>
+					<li><a href="products.html">Branded Foods</a></li>
+					<li><a href="household.html">Households</a></li>
+				</ul>
+			</div>
+		<!--	<div class="col-md-3 w3_footer_grid">
+				<h3>twitter posts</h3>
+				<ul class="w3_footer_grid_list1">
+					<li><label class="fa fa-twitter" aria-hidden="true"></label><i>01 day ago</i><span>Non numquam <a href="#">http://sd.ds/13jklf#</a>
+						eius modi tempora incidunt ut labore et
+						<a href="#">http://sd.ds/1389kjklf#</a>quo nulla.</span></li>
+					<li><label class="fa fa-twitter" aria-hidden="true"></label><i>02 day ago</i><span>Con numquam <a href="#">http://fd.uf/56hfg#</a>
+						eius modi tempora incidunt ut labore et
+						<a href="#">http://fd.uf/56hfg#</a>quo nulla.</span></li>
+				</ul>
+			</div> 
+		-->	
+			<div class="clearfix"> </div>
+			<div class="agile_footer_grids">
+				<div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+					<div class="w3_footer_grid_bottom">
+						<h4>100% ασφαλείς πληρωμές</h4>
+						<img src="{% static 'shop/images/card.png' %}" alt=" " class="img-responsive" />
+					</div>
+				</div>
+				<div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+					<div class="w3_footer_grid_bottom">
+						<h5>Ακολουθείστε μας</h5>
+						<ul class="agileits_social_icons">
+							<li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							<li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+							<li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+							<li><a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+							<li><a href="#" class="dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+<!--			<div class="wthree_footer_copy">
+				<p>© 2016 Grocery Store. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+			</div>
+-->			
+		</div>
+	</div>
+<!-- //footer -->
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static 'shop/js/bootstrap.min.js' %}"></script>
+<script>
+$(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+});
+</script>
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+<!-- //here ends scrolling icon -->
+	<script src="{% static 'shop/js/minicart.js' %"></script>
+<script>
+		paypal.minicart.render();
+
+		paypal.minicart.cart.on('checkout', function (evt) {
+			var items = this.items(),
+				len = items.length,
+				total = 0,
+				i;
+
+			// Count the number of each item in the cart
+			for (i = 0; i < len; i++) {
+				total += items[i].get('quantity');
+			}
+
+			if (total < 3) {
+				alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+				evt.preventDefault();
+			}
+		});
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+{% block content %}
+{% if anonymous %}
+  <div class="form">
+    <form method = "POST" action="{% url 'anonymous' %}">
+              {% csrf_token %}  
+              <input type="number" id = "quantities" name="quantities" min="1" max="50" value="1">
+              <input type="submit" class="btn btn-info" value="Προσθήκη στο καλάθι" >
+              </form>
+  </div>
+{% endif %}
+
+<div class="w3l_banner_nav_right">
+<!-- about -->
+  <div class="privacy about">
+    <h3>Καλ<span>άθι</span></h3>
+  
+      <div class="checkout-right">
+        <h4>Το καλαθι σας περιλαμβανει: <span></span></h4>
+        <table class="timetable_sub">
+          <thead>
+            <tr>
+              <th>Αρ.</th>  
+              <th>Προϊόν</th>
+              <th>Όνομα Προϊόντος</th>
+              <th>Τιμή</th>
+              <th>Ποσότητα</th>
+              <th>Υποσύνολο</th>
+              <th>Αφαίρεση</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for item in order.get_cart_items %}
+          <!-- <h1>{{item.date_added}}</h1> -->
+            <tr class="rem1">
+              <td class="invert">{{ forloop.counter }}</td>
+              <td class="invert-image"><a href="{% url 'product_detail' item.product.slug %}"><img src="{{item.product.photo.url}}" alt="img" class="img-responsive"></a></td>
+              <td class="invert">{{ item }}</td> 
+              {% if item.product.salePrice == 0 %} 
+                <td class="invert">{{ item.product.price }}</td>
+              {% else %}
+                <td class="invert">{{ item.product.salePrice }}</td>
+              {% endif %}
+              {% for items in instance %}
+                {% if forloop.counter == forloop.parentloop.counter %}
+                <!-- <h1>{{items}}</h1>
+                <h1>{{items.product.product.name}}</h1>
+                <h1>{{items.quantity}}</h1>
+ -->
+                  <td class="invert"> 
+                  <form method = "POST" action="{% url 'add_to_cart_order_summary' item.product.id %}">
+                    {% csrf_token %}
+                  <input type="number" id = "quantities" name="quantities" min="1" max="50" value="{{items.quantity}}">
+                  <input type="submit" class="btn btn-success" value = "Ανανέωση">
+                </form> </td>                 
+                {% endif %}
+              {% endfor %}
+              {% for subtotal in item_subtotal %}
+               {% if forloop.counter == forloop.parentloop.counter %}
+                  <td class="invert">{{ subtotal }}</td>
+                {% endif %}
+              {% endfor %}
+
+
+              <td class="invert">
+                <button><a href="{% url 'delete_from_cart' item.id %}" />Αφαίρεση </button>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan = 6> Δεν έχετε προσθέσει προϊόντα στο καλάθι σας ακόμη.</td>
+            </tr>
+          {% endfor %}
+          <tr>
+            <td colspan = 4><font color="red" ><strong>Σύνολο</strong></font> </td>
+            <td colspan = 2><font color="red" ><strong>{{ total_sum }} EUR</strong></font></td>
+          </tr>
+          <!-- <tr></tr> -->
+          <tr>
+            <td colspan = 3>
+              <a href="{% url 'home' %}" class="btn btn-warning pull-left">
+                {% if order %}
+                  Συνεχίστε τα ψώνια σας
+                {% else %}
+                  Προσθέστε προϊόντα στο καλάθι 
+                {% endif %}
+              </a> 
+            </td>
+            <td colspan = 3>
+              {% if order.get_cart_items %}
+                <a href="{% url 'checkout' %}" class="pull-right btn btn-primary">Συνέχεια στην πληρωμή</a>
+              {% endif %}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+<!-- //about -->
+</div>
+<div class="clearfix"></div>
+
+{% endblock %}
+</html>
